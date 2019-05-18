@@ -1,0 +1,39 @@
+.body-content {
+    margin-top: 50px;
+}
+
+td, th {
+    padding: 10px;
+}
+
+tr:nth-child(odd) {
+    background-color: #F3E2E2;
+}
+
+table {
+    margin: 30px auto;
+    border: 1px solid #F3E2E2;
+    width: 80%;
+}
+
+table td:first-child {
+    font-weight: bold;
+}
+
+table td:last-child {
+    width: 40%;
+}
+
+label {
+    margin-right:60px;
+}
+
+ul.form-group {
+    padding: 0;
+}
+
+ul.form-group li {
+    list-display: none;
+    display: inline-block;
+    padding-right: 15px;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+
+
+
+
+<div style="margin:10px; margin-right:500px; padding-top:10px; background-color:light-green;">
+
+    <img src="https://health.clevelandclinic.org/wp-content/uploads/sites/3/2018/10/ketoDiet-939019496-650x450-1.jpg"
+         style="margin-top:0px;" width="600" height="200">
+
+    <p>This platform is for the keto community to share recipes and give advice to other ketOpians.</p>
+    <p>SHARE YOUR PROGRESS!!!</p>
+
+
+
+
+
+</div>
+
+<table class="table table-hover">
+
+    <tr>
+        <th>Recipe</th>
+        <th>Description</th>
+        <th>User</th>
+
+
+    </tr>
+
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.name}"></td>
+        <td th:text="${recipe.description}"></td>
+        <td th:text="${recipe.user.username}"></td>
+
+
+
+    </tr>
+
+
+
+</table>
+
+<!--<table class="table">
+
+    <tr>
+        <th>Title</th>
+        <th>Entry</th>
+        <th>User</th>
+
+
+    </tr>
+
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.title}"></td>
+        <td th:text="${comment.entry}"></td>
+        <td th:text="${comment.user.username}"></td>
+
+
+    </tr>
+
+</table>-->
+
+
+
+
+
+
+
+
+<a href="https://www.facebook.com/sharer/
+sharer.php?u=https%3A%2F%2Fketodietapp.com%2FBlog%2Flchf%2F7-common-diet-myths-in-the-keto-community">FaceBook</a>
+
+
+<p><a href="/user/login">Get started!!!!</a></p>
+
+</body>
+</html>

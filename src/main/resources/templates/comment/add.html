@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation2"></nav>
+
+
+
+<form method="post" style="max-width:600px;" th:object="${comment}">
+    <div class="form-group">
+        <label th:for="title">Title</label>
+        <input class="form-control" th:field="*{title}" />
+        <span th:errors="*{title}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="entry">Entry</label>
+        <input class="form-control" th:field="*{entry}" />
+        <span th:errors="*{entry}" class="error"></span>
+    </div>
+
+
+
+    <input type="submit" value="Add Comment" />
+</form>
+
+</body>
+</html>

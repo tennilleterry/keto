@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+
+<!--<h1 th:text="${title} + ' ' + 'Welcome:' +' '+ ${user}">Default Title</h1>-->
+<h1 th:text="'Welcome:' +' '+ ${user}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation2"></nav>
+
+<p th:unless="${recipes} and ${recipes.size()}">No recipe yet!</p>
+
+
+
+
+
+<table class="table">
+
+    <tr>
+        <th>Recipe</th>
+        <th>Description</th>
+        <th>User</th>
+
+
+    </tr>
+
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.name}"></td>
+        <td th:text="${recipe.description}"></td>
+        <td th:text="${recipe.user.username}"></td>
+
+
+
+    </tr>
+
+
+
+</table>
+<a href="/recipe/add" class="btn btn-info" role="button">Add Recipe</a>
+
+
+
+
+</body>
+</html>
