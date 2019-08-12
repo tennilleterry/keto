@@ -1,18 +1,17 @@
 package com.terry.keto.controllers;
 
 
+import com.terry.keto.models.Comment;
 import com.terry.keto.models.Recipe;
 import com.terry.keto.models.User;
+import com.terry.keto.models.data.CommentDao;
 import com.terry.keto.models.data.RecipeDao;
 import com.terry.keto.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,6 +24,9 @@ public class RecipeController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private CommentDao commentDao;
 
 
     @RequestMapping(value = "")
@@ -63,6 +65,8 @@ public class RecipeController {
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
+
+
         User u = userDao.findByUsername(username).get(0);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add recipe");
@@ -72,8 +76,34 @@ public class RecipeController {
 
         newRecipe.setUser(u);
         recipeDao.save(newRecipe);
-        return "redirect:";
+        //return "redirect:";
+
+        return "redirect:view/" + newRecipe.getId();
     }
+
+
+
+
+
+
+
+    @RequestMapping(value="view/{id}", method = RequestMethod.GET)
+    public String viewRecipe(Model model, @PathVariable int id){
+
+
+
+        Recipe recipe = recipeDao.findById(id);
+
+        model.addAttribute("title", recipe.getName());
+        model.addAttribute("recipes", recipe.getDescription());
+
+
+        model.addAttribute("recipes",recipe.getComments());
+        model.addAttribute("id", recipe.getId());
+
+        return "recipe/view";
+    }
+
 
 
 }

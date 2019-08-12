@@ -76,7 +76,7 @@ public class UserController {
             Cookie c = new Cookie("user", user.getUsername());
             c.setPath("/");
             response.addCookie(c);
-            return "redirect:/recipe";
+            return "redirect:/home";
         } else {
             model.addAttribute("messagepass", "Invalid Password");
             model.addAttribute("title", "Login");

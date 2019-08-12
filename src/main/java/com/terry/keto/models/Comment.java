@@ -1,5 +1,7 @@
 package com.terry.keto.models;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,11 +16,11 @@ public class Comment {
     private int id;
 
     @NotNull
-    @Size(min = 8, max = 100, message = "min 3 max 15")
+    @Size(min = 8, max = 100, message = "min 8 max 100")
     private String title;
 
     @NotNull
-    @Size(min = 8, max = 100, message = "min 7")
+    @Size(min = 8, max = 100, message = "min 8 max 100")
     private String entry;
 
     @ManyToOne
@@ -30,7 +32,18 @@ public class Comment {
 
     }
 
+
+
+
+    //@ManyToMany(mappedBy="comments")
+    //private List<Recipe> recipes;
+
+    @ManyToOne
+    private Recipe recipe;
+
     public Comment() { }
+
+
 
     public int getId() {
 
@@ -55,7 +68,20 @@ public class Comment {
     public void setEntry(String entry) {
 
         this.entry = entry;
+
     }
+
+    //public List<Recipe> getRecipe() { return recipes; }
+
+    public Recipe getRecipe() {
+
+        return recipe;
+    }
+    public void setRecipe(Recipe recipe) {
+
+        this.recipe = recipe;
+    }
+
 
     public User getUser() {
 
@@ -65,5 +91,8 @@ public class Comment {
 
         this.user = u;
     }
+
+
+
 
 }

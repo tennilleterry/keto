@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1>wow</h1>
+
+<h1 th:text="${title}">Default Title</h1>
+
+<!--<ul>
+    <li th:each="comment : ${comments}" th:text="${comment.entry}">
+    </li>
+</ul>
+
+<ul>
+    <li th:each="recipe : ${recipes}" th:text="${recipe.description}">
+    </li>
+</ul>
+<p th:unless="${comments} and ${comments.size()}"><i>No comments Yet</i></p>-->
+
+
+<a th:href="'/comment/add/' + ${id}">Add comments</a>
+
+</body>
+</html>

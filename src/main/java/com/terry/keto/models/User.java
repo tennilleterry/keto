@@ -25,19 +25,7 @@ public class User {
     @Email
     private String email;
 
-   /* @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Book> books;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Book1> book1;
-
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Book2> book2;
-
-    */
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Recipe> recipes;

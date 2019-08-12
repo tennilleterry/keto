@@ -14,16 +14,24 @@ public class Recipe {
     private int id;
 
     @NotNull
-    @Size(min = 8, max = 100, message = "min 5 max 25")
+    @Size(min = 8, max = 100, message = "min 8, max 100")
     private String name;
 
     @NotNull
-    @Size(min = 8, max = 300, message = "min 10 max 100")
+    @Size(min = 8, max = 300, message = "min 8, max 300")
     private String description;
+
 
 
     @ManyToOne
     private User user;
+
+    @OneToMany
+    @JoinColumn(name = "comment_id")
+    private List<Comment> comments;
+
+    //@ManyToMany
+    //private List<Comment> comments;
 
     public Recipe(String name, String description) {
         this.name = name;
@@ -58,6 +66,9 @@ public class Recipe {
         this.description = description;
     }
 
+
+
+
     public User getUser() {
 
         return user;
@@ -65,6 +76,10 @@ public class Recipe {
     public void setUser(User u) {
 
         this.user = u;
+    }
+
+    public List<Comment> getComments(){
+        return comments;
     }
 
 }
