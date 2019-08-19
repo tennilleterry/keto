@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,8 +28,8 @@ public class Recipe {
     private User user;
 
     @OneToMany
-    @JoinColumn(name = "comment_id")
-    private List<Comment> comments;
+    @JoinColumn(name = "recipe_id")
+    private List<Comment> comments = new ArrayList<>();
 
     //@ManyToMany
     //private List<Comment> comments;

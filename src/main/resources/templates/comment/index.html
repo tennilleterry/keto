@@ -5,23 +5,24 @@
 <body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${recipe}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation2"></nav>
 
 <p th:unless="${comments} and ${comments.size()}">No comments yet!</p>
 
 
-<h1>jsj</h1>
+
 
 <table class="table table-hover">
     <thead class="thead-dark">
 
     <tr>
 
-        <th>Name</th>
-        <th>Address</th>
-        <th>Description</th>
-        <th>Status</th>
+        <th>Title</th>
+        <th>Entry</th>
+        <!--<th>Recipe</th>-->
+        <th>User</th>
 
     </tr>
 
@@ -39,47 +40,13 @@
 </table>
 
 
-<!--<table class="table">
-
-    <tr>
-        <th>Title</th>
-        <th>Entry</th>
-        <th>User</th>
 
 
-    </tr>
-
-    <tr th:each="comment : ${comments}">
-
-        <td th:text="${comment.name}"></td>
-        <td th:text="${comment.description}"></td>
-        <td th:text="${comment.user.username}"></td>
-        <td th:text="${comment.id}"></td>
 
 
-    </tr>
-
-</table>-->
-
-<!--<table class="table">
-
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Comments</th>
 
 
-    </tr>
 
-    <tr th:each="recipe : ${recipes}">
-        <td th:text="${recipe.name}"></td>
-        <td th:text="${recipe.description}"></td>
-        <td th:text="${recipe.comments}"></td>
-
-
-    </tr>
-
-</table>-->
 
 <a href="/comment/add" class="btn btn-info" role="button">Add Comment</a>
 

@@ -60,7 +60,7 @@ public class CommentController {
     public String index(Model model) {
 
         model.addAttribute("comments", commentDao.findAll());
-        model.addAttribute("title", "Available Properties");
+        model.addAttribute("title", "All Comments");
 
         //List<Comment> comments = theRecipe.getComments();
         //model.addAttribute("comments", comments);
@@ -143,8 +143,8 @@ public class CommentController {
 
 
 
-        return "redirect:/comment";
-        //return "redirect:/comment/recipe";
+        //return "redirect:/comment";
+        return "redirect:/comment/recipe/" + recipe.getId();
 
     }
 
@@ -198,14 +198,27 @@ public class CommentController {
         return "comment/view";
     }*/
 
-    @RequestMapping(value = "recipe", method = RequestMethod.GET)
-    public String recipe(Model model, @RequestParam int id) {
+
+    //Work on getting user to show
+    @RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
+    public String recipe(Model model, @PathVariable int id) {
+        //User u = userDao.findByUsername(username).get(0);
+
         Recipe theRecipe = recipeDao.findById(id);
         List<Comment> comments = theRecipe.getComments();
         model.addAttribute("comments", comments);
-        model.addAttribute("title", "Comment: " + theRecipe.getName());
+        model.addAttribute("title", "Recipe: " + theRecipe.getName());
         return "comment/index";
 
+
+
+        /*@RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
+        public String recipe(Model model, @PathVariable int id) {
+            Comment theComment = commentDao.findById(id);
+            model.addAttribute("recipe", theComment.getRecipe());
+            //model.addAttribute("comments", comments);
+            model.addAttribute("title", "Comment: " + theComment.getTitle());
+            return "comment/index";*/
     }
 
 }
