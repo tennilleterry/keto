@@ -11,10 +11,35 @@
 <p th:unless="${comments} and ${comments.size()}">No comments yet!</p>
 
 
+<h1>jsj</h1>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+
+    <tr>
+
+        <th>Name</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Status</th>
+
+    </tr>
+
+    </thead>
+
+    <tr th:each="comment : ${comments}">
+
+        <td th:text="${comment.title}"></td>
+        <td th:text="${comment.entry}"></td>
+
+        <!--<td th:text="${comment.recipe.name}"></td>-->
+        <!--<td th:text="${comment.user.username}"></td>-->
+    </tr>
+
+</table>
 
 
-
-<table class="table">
+<!--<table class="table">
 
     <tr>
         <th>Title</th>
@@ -25,14 +50,37 @@
     </tr>
 
     <tr th:each="comment : ${comments}">
-        <td th:text="${comment.title}"></td>
-        <td th:text="${comment.entry}"></td>
+
+        <td th:text="${comment.name}"></td>
+        <td th:text="${comment.description}"></td>
         <td th:text="${comment.user.username}"></td>
+        <td th:text="${comment.id}"></td>
 
 
     </tr>
 
-</table>
+</table>-->
+
+<!--<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Comments</th>
+
+
+    </tr>
+
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.name}"></td>
+        <td th:text="${recipe.description}"></td>
+        <td th:text="${recipe.comments}"></td>
+
+
+    </tr>
+
+</table>-->
+
 <a href="/comment/add" class="btn btn-info" role="button">Add Comment</a>
 
 

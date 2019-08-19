@@ -95,10 +95,10 @@ public class RecipeController {
         Recipe recipe = recipeDao.findById(id);
 
         model.addAttribute("title", recipe.getName());
-        model.addAttribute("recipes", recipe.getDescription());
+        model.addAttribute("description", recipe.getDescription());
 
 
-        model.addAttribute("recipes",recipe.getComments());
+        model.addAttribute("comments",recipe.getComments());
         model.addAttribute("id", recipe.getId());
 
         return "recipe/view";

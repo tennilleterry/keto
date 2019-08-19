@@ -7,14 +7,11 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul>
-    <li th:each="comment : ${comments}" th:text="${comment.name}">
+    <li th:each="comment : ${comments}" th:text="${comment.entry}">
     </li>
 </ul>
 
-<ul>
-    <li th:each="recipe : ${recipes}" th:text="${recipe.description}">
-    </li>
-</ul>
+
 <p th:unless="${comments} and ${comments.size()}"><i>No comments Yet</i></p>
 
 

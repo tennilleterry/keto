@@ -9,9 +9,10 @@
 <h1>wow</h1>
 
 <h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${id}">Default Title</h1>
 
 <!--<ul>
-    <li th:each="comment : ${comments}" th:text="${comment.entry}">
+    <li th:each="comment : ${comments}" th:text="${comment.title}">
     </li>
 </ul>
 
@@ -20,6 +21,8 @@
     </li>
 </ul>
 <p th:unless="${comments} and ${comments.size()}"><i>No comments Yet</i></p>-->
+
+
 
 
 <a th:href="'/comment/add/' + ${id}">Add comments</a>

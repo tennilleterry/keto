@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("comment")
@@ -30,41 +31,66 @@ public class CommentController {
     private UserDao userDao;
 
 
-    @RequestMapping(value = "")
+    /*@RequestMapping(value = "")
     public String index(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
 
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
 
+        //Comment comment = commentDao.findById(id);
         User u = userDao.findByUsername(username).get(0);
+        //model.addAttribute("recipes", recipeDao.findAll());
+       // model.addAttribute("comments", commentDao.findAll());
+        //model.addAttribute("recipes", recipe.getComments());
+        model.addAttribute("comments", u.getRecipes());
+        //model.addAttribute("comments", u.getComments());
+        //model.addAttribute("comments", comment.getRecipe());
+        //model.addAttribute("comment", comment.getTitle());
 
-        model.addAttribute("comments", u.getComments());
+
+       // model.addAttribute("comments", comment.getRecipe());
         model.addAttribute("title", "My Comments");
+
+        return "comment/index";
+    }*/
+
+
+    @RequestMapping(value = "")
+    public String index(Model model) {
+
+        model.addAttribute("comments", commentDao.findAll());
+        model.addAttribute("title", "Available Properties");
+
+        //List<Comment> comments = theRecipe.getComments();
+        //model.addAttribute("comments", comments);
+        //model.addAttribute("title", "Comment: " + theRecipe.getName());
 
         return "comment/index";
     }
 
 
 
-
-
-
     @RequestMapping(value = "add/{id}", method = RequestMethod.GET)
     public String displayAddCommentForm(Model model, @CookieValue(value = "user", defaultValue = "none")
-            String username, @PathVariable int id) {
+            String username,@PathVariable int id) {
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
         User u = userDao.findByUsername(username).get(0);
         model.addAttribute("title", "Add comment");
+        model.addAttribute("recipes", recipeDao.findAll());
+
+
+        model.addAttribute("users", userDao.findAll());
+
 
         Recipe recipe = recipeDao.findById(id);
-        model.addAttribute("title", recipe.getName());
+        //model.addAttribute("title", recipe.getName());
 
 
-        model.addAttribute("description",recipe.getDescription());
-        model.addAttribute("id",recipe.getId());
+       // model.addAttribute("description",recipe.getDescription());
+        //model.addAttribute("id",recipe.getId());
 
 
 
@@ -76,11 +102,56 @@ public class CommentController {
 
 
 
-
-
-
-
     @RequestMapping(value = "add/{id}", method = RequestMethod.POST)
+    public String processAddCommentForm(@ModelAttribute @Valid Comment newComment,
+                                         Errors errors, @PathVariable int id, Model model, @CookieValue(value = "user", defaultValue = "none")
+                                                    String username) {
+
+        if(username.equals("none")) {
+            return "redirect:/user/login";
+        }
+
+        User u = userDao.findByUsername(username).get(0);
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Property");
+            model.addAttribute("recipes", recipeDao.findAll());
+
+
+
+            model.addAttribute("users", userDao.findAll());
+
+
+            return "comment/add";
+        }
+
+
+        //Recipe theRecipe = recipeDao.findById(recipeId);
+        //newComment.setUser(u);
+        //newComment.setRecipe(theRecipe);
+        //commentDao.save(newComment);
+
+
+        Recipe recipe = recipeDao.findById(id);
+        newComment.setUser(u);
+        newComment.setRecipe(recipe);
+        commentDao.save(newComment);
+
+
+
+
+
+
+
+        return "redirect:/comment";
+        //return "redirect:/comment/recipe";
+
+    }
+
+
+
+
+    /*@RequestMapping(value = "add/{id}", method = RequestMethod.POST)
     public String processAddCommentForm(
             @ModelAttribute @Valid Comment newComment,
             Errors errors,
@@ -102,30 +173,39 @@ public class CommentController {
         commentDao.save(newComment);
 
 
-        return "redirect:view/" + newComment.getId();
-        //return "comment/view/" + newComment.getId();
 
-    }
+        //return "redirect:view/" + newComment.getId();
+        return "redirect:/comment/";
+
+    }*/
 
 
 
-    @RequestMapping(value="view/{id}", method = RequestMethod.GET)
-    public String viewComment(Model model, @PathVariable int id){
-
+    /*@RequestMapping(value="view/{id}", method = RequestMethod.GET)
+    public String viewComment(Model model, @PathVariable int id) {
 
 
         Comment comment = commentDao.findById(id);
 
         model.addAttribute("title", comment.getTitle());
-        model.addAttribute("comments", comment.getEntry());
-
-
-        model.addAttribute("recipes",comment.getRecipe());
         model.addAttribute("id", comment.getId());
+        //model.addAttribute("comments", comment.getEntry());
 
+
+        //model.addAttribute("recipes", comment.getRecipe());
+        //model.addAttribute("id", comment.getId());
 
         return "comment/view";
-    }
+    }*/
 
+    @RequestMapping(value = "recipe", method = RequestMethod.GET)
+    public String recipe(Model model, @RequestParam int id) {
+        Recipe theRecipe = recipeDao.findById(id);
+        List<Comment> comments = theRecipe.getComments();
+        model.addAttribute("comments", comments);
+        model.addAttribute("title", "Comment: " + theRecipe.getName());
+        return "comment/index";
+
+    }
 
 }
