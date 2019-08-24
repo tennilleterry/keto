@@ -2,18 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
+
 
 <nav th:replace="fragments :: navigation2"></nav>
 
 
 
+
+<h1><p th:text="${title}">Default Title</p></h1>
 <p th:text="${description}">Default Title</p>
-<p th:text="${id}">Default Title</p>
 
 
 
-<form method="post" style="max-width:600px;" th:object="${comment}">
+<form method="post" style="max-width:200px;margin:10px; margin-right:50px;margin-left:800px" th:object="${comment}">
     <div class="form-group">
         <label th:for="title">Title</label>
         <input class="form-control" th:field="*{title}" />
@@ -29,10 +30,39 @@
 
     <!--<input type="hidden" name="recipeId" th:value="*{id}" />-->
 
-    <button type="submit" class="btn btn-primary">Add Listing</button>
+    <button type="submit" class="btn btn-primary">Add Comment</button>
 
-   <!--<input type="submit" value="Add Comment" />-->
+    <!--<input type="submit" value="Add Comment" />-->
 </form>
+
+
+<table class="table table-hover" style="max-width:800px; margin-right:50px;">
+    <thead class="thead-dark">
+
+    <tr>
+
+        <th>Title</th>
+        <th>Entry</th>
+        <th>User</th>
+
+
+    </tr>
+
+    </thead>
+
+    <tr th:each="comment : ${comments}">
+
+        <td th:text="${comment.title}"></td>
+        <td th:text="${comment.entry}"></td>
+        <td th:text="${comment.user.username}"></td>
+
+
+    </tr>
+
+</table>
+
+
+
 
 </body>
 </html>

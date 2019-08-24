@@ -31,40 +31,21 @@ public class CommentController {
     private UserDao userDao;
 
 
-    /*@RequestMapping(value = "")
-    public String index(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
-
-        if(username.equals("none")) {
-            return "redirect:/user/login";
-        }
-
-        //Comment comment = commentDao.findById(id);
-        User u = userDao.findByUsername(username).get(0);
-        //model.addAttribute("recipes", recipeDao.findAll());
-       // model.addAttribute("comments", commentDao.findAll());
-        //model.addAttribute("recipes", recipe.getComments());
-        model.addAttribute("comments", u.getRecipes());
-        //model.addAttribute("comments", u.getComments());
-        //model.addAttribute("comments", comment.getRecipe());
-        //model.addAttribute("comment", comment.getTitle());
-
-
-       // model.addAttribute("comments", comment.getRecipe());
-        model.addAttribute("title", "My Comments");
-
-        return "comment/index";
-    }*/
-
 
     @RequestMapping(value = "")
-    public String index(Model model) {
+    public String index(Model model,@CookieValue(value = "user", defaultValue = "none")
+            String username) {
 
-        model.addAttribute("comments", commentDao.findAll());
-        model.addAttribute("title", "All Comments");
 
-        //List<Comment> comments = theRecipe.getComments();
-        //model.addAttribute("comments", comments);
-        //model.addAttribute("title", "Comment: " + theRecipe.getName());
+        model.addAttribute("title", "All My Comments");
+        User u = userDao.findByUsername(username).get(0);
+
+
+        model.addAttribute("comments", u.getComments());
+        model.addAttribute("user", u.getUsername());
+
+
+
 
         return "comment/index";
     }
@@ -78,19 +59,17 @@ public class CommentController {
             return "redirect:/user/login";
         }
         User u = userDao.findByUsername(username).get(0);
-        model.addAttribute("title", "Add comment");
-        model.addAttribute("recipes", recipeDao.findAll());
-
-
-        model.addAttribute("users", userDao.findAll());
 
 
         Recipe recipe = recipeDao.findById(id);
-        //model.addAttribute("title", recipe.getName());
+        model.addAttribute("title", recipe.getName());
+        model.addAttribute("description",recipe.getDescription());
 
 
-       // model.addAttribute("description",recipe.getDescription());
-        //model.addAttribute("id",recipe.getId());
+        model.addAttribute("comments", recipe.getComments());
+
+
+        model.addAttribute("user",u.getUsername());
 
 
 
@@ -126,10 +105,7 @@ public class CommentController {
         }
 
 
-        //Recipe theRecipe = recipeDao.findById(recipeId);
-        //newComment.setUser(u);
-        //newComment.setRecipe(theRecipe);
-        //commentDao.save(newComment);
+
 
 
         Recipe recipe = recipeDao.findById(id);
@@ -143,82 +119,33 @@ public class CommentController {
 
 
 
-        //return "redirect:/comment";
-        return "redirect:/comment/recipe/" + recipe.getId();
+        return "redirect:/comment/";
+        //return "redirect:/comment/recipe/" + recipe.getId();
 
     }
 
 
 
 
-    /*@RequestMapping(value = "add/{id}", method = RequestMethod.POST)
-    public String processAddCommentForm(
-            @ModelAttribute @Valid Comment newComment,
-            Errors errors,
-            Model model , @CookieValue(value = "user", defaultValue = "none") String username, @PathVariable int id) {
-        if(username.equals("none")) {
-            return "redirect:/user/login";
-        }
-
-
+   /* @RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
+    public String recipe(Model model, @PathVariable int id,@CookieValue(value = "user", defaultValue = "none")
+            String username) {
         User u = userDao.findByUsername(username).get(0);
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add comment");
-            return "comment/add";
-        }
 
         Recipe theRecipe = recipeDao.findById(id);
-        newComment.setUser(u);
-        newComment.setRecipe(theRecipe);
-        commentDao.save(newComment);
 
 
 
-        //return "redirect:view/" + newComment.getId();
-        return "redirect:/comment/";
+        model.addAttribute("comments", u.getComments());
+        model.addAttribute("user", u.getUsername());
 
-    }*/
-
-
-
-    /*@RequestMapping(value="view/{id}", method = RequestMethod.GET)
-    public String viewComment(Model model, @PathVariable int id) {
-
-
-        Comment comment = commentDao.findById(id);
-
-        model.addAttribute("title", comment.getTitle());
-        model.addAttribute("id", comment.getId());
-        //model.addAttribute("comments", comment.getEntry());
-
-
-        //model.addAttribute("recipes", comment.getRecipe());
-        //model.addAttribute("id", comment.getId());
-
-        return "comment/view";
-    }*/
-
-
-    //Work on getting user to show
-    @RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
-    public String recipe(Model model, @PathVariable int id) {
-        //User u = userDao.findByUsername(username).get(0);
-
-        Recipe theRecipe = recipeDao.findById(id);
-        List<Comment> comments = theRecipe.getComments();
-        model.addAttribute("comments", comments);
         model.addAttribute("title", "Recipe: " + theRecipe.getName());
         return "comment/index";
 
 
 
-        /*@RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
-        public String recipe(Model model, @PathVariable int id) {
-            Comment theComment = commentDao.findById(id);
-            model.addAttribute("recipe", theComment.getRecipe());
-            //model.addAttribute("comments", comments);
-            model.addAttribute("title", "Comment: " + theComment.getTitle());
-            return "comment/index";*/
+
     }
+    */
 
 }

@@ -5,7 +5,7 @@
 <body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
-<h1 th:text="${recipe}">Default Title</h1>
+
 
 <nav th:replace="fragments :: navigation2"></nav>
 
@@ -34,7 +34,7 @@
         <td th:text="${comment.entry}"></td>
 
         <!--<td th:text="${comment.recipe.name}"></td>-->
-        <!--<td th:text="${comment.user.username}"></td>-->
+        <td th:text="${comment.user.username}"></td>
     </tr>
 
 </table>
