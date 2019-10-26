@@ -11,4 +11,8 @@ import javax.transaction.Transactional;
 public interface RecipeDao extends CrudRepository<Recipe, Integer> {
     public Recipe findById(int id);
 
+   // void delete(int id);
+
+    //void delete(int id);
+    //void delete(int id);
 }

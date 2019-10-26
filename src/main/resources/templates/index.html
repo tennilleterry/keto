@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container" style="background-color:#BDBDBD">
 
 <h1 th:text="${title}">Default Title</h1>
 
@@ -13,23 +13,22 @@
 
 
 
-<div style="margin:10px; margin-right:500px; padding-top:10px; background-color:light-green;">
+<div class ="text-center" style="margin:100px; padding-top:50px;">
 
 
 
     <p>This platform is for the keto community to share recipes and give your variations and advice.</p>
     <p>SHARE YOUR PROGRESS :) </p>
+    <p><a href="/user/login">Get started!!!!</a></p>
 
 
-
-
-
+    <img src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/healthy-fats-for-keto-1296x728-feature.jpg" width="1000" height="1000">
 </div>
 
 
 
 
-<p><a href="/user/login">Get started!!!!</a></p>
+
 
 </body>
 </html>

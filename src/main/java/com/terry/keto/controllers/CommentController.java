@@ -37,11 +37,12 @@ public class CommentController {
             String username) {
 
 
-        model.addAttribute("title", "All My Comments");
+        //model.addAttribute("title", "All My Comments");
         User u = userDao.findByUsername(username).get(0);
 
 
         model.addAttribute("comments", u.getComments());
+        //model.addAttribute("recipes", u.getRecipes());
         model.addAttribute("user", u.getUsername());
 
 
@@ -93,7 +94,7 @@ public class CommentController {
         User u = userDao.findByUsername(username).get(0);
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Property");
+            model.addAttribute("title", "Add Comment");
             model.addAttribute("recipes", recipeDao.findAll());
 
 
@@ -120,32 +121,31 @@ public class CommentController {
 
 
         return "redirect:/comment/";
-        //return "redirect:/comment/recipe/" + recipe.getId();
+
 
     }
 
 
 
 
-   /* @RequestMapping(value = "recipe/{id}", method = RequestMethod.GET)
-    public String recipe(Model model, @PathVariable int id,@CookieValue(value = "user", defaultValue = "none")
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveCommentForm(Model model, @CookieValue(value = "user", defaultValue = "none")
             String username) {
+
         User u = userDao.findByUsername(username).get(0);
-
-        Recipe theRecipe = recipeDao.findById(id);
-
-
-
         model.addAttribute("comments", u.getComments());
-        model.addAttribute("user", u.getUsername());
-
-        model.addAttribute("title", "Recipe: " + theRecipe.getName());
-        return "comment/index";
-
-
-
-
+        model.addAttribute("title", "Remove Comment");
+        return "comment/remove";
     }
-    */
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveCommentForm(@RequestParam int[] ids) {
+
+        for (int id : ids) {
+            commentDao.deleteById(id);
+        }
+        return "redirect:";
+    }
 
 }

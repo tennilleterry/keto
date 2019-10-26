@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container" style="background-color:#BDBDBD">
 
 
 <!--<h1 th:text="${title} + ' ' + 'Welcome:' +' '+ ${user}">Default Title</h1>-->
-<h1 th:text="'Welcome:' +' '+ ${user}">Default Title</h1>
+<!--<h1 th:text="'Welcome:' +' '+ ${user}">Default Title</h1>-->
+<h1 th:text="${user} + ' ' + ' Recipes'"></h1>
 
 <nav th:replace="fragments :: navigation2"></nav>
 
@@ -39,6 +40,7 @@
 
 </table>
 <a href="/recipe/add" class="btn btn-info" role="button">Add Recipe</a>
+<a href="/recipe/remove" class="btn btn-info" role="button">Remove Recipe</a>
 
 
 

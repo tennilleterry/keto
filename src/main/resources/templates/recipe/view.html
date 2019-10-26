@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body class="container" style="background-color:#BDBDBD">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
@@ -12,7 +12,6 @@
 </ul>
 
 
-<p th:unless="${comments} and ${comments.size()}"><i>No comments Yet</i></p>
 
 
 <a th:href="'/recipe/add-item/' + ${id}">Add comments</a>

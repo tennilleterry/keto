@@ -31,19 +31,7 @@ public class HomeController {
         return "home/index";
     }
 
-    @RequestMapping(value="view/{id}", method = RequestMethod.GET)
-    public String viewRecipe(Model model, @PathVariable int id){
 
-
-        Recipe recipe = recipeDao.findById(id);
-        model.addAttribute("title", recipe.getName());
-
-
-        model.addAttribute("description",recipe.getDescription());
-        model.addAttribute("id",recipe.getId());
-
-        return "home/view";
-    }
 
 
 

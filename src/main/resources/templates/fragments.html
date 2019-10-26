@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">Online Book Club</title>
+    <title th:text="${title}">KetOpia</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -13,11 +13,11 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation" style="background-color:#433b3a">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/user/add">New?</a>
-            <a class="navbar-brand" href="/user/login">Log in to add recipe or share ideas.</a>
+            <a class="navbar-brand" href="/user/add">New? Click to create an account.</a>
+            <!--<a class="navbar-brand" href="/user/login">Log in to add recipe or share ideas.</a>-->
 
 
         </div>
@@ -31,11 +31,11 @@
 </nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation2" style="background-color:#433b3a">
 <!--<nav class="navbar navbar-inverse" th:fragment="navigation2">-->
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/home">Home</a>
         </div>
         <ul class="nav navbar-nav">
 

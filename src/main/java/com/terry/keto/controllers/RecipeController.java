@@ -76,9 +76,11 @@ public class RecipeController {
 
         newRecipe.setUser(u);
         recipeDao.save(newRecipe);
-        //return "redirect:";
 
-        return "redirect:view/" + newRecipe.getId();
+
+        // "redirect:view/" + newRecipe.getId(); Shows view of recipe
+
+        return "redirect:";
     }
 
 
@@ -102,6 +104,23 @@ public class RecipeController {
         model.addAttribute("id", recipe.getId());
 
         return "recipe/view";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveRecipeForm(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+        User u = userDao.findByUsername(username).get(0);
+        model.addAttribute("recipes", u.getRecipes());
+        model.addAttribute("title", "Remove recipe");
+        return "recipe/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveRecipeForm(@RequestParam int[] ids) {
+
+        for (int id : ids) {
+            recipeDao.deleteById(id);
+        }
+        return "redirect:";
     }
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body class="container" style="background-color:#BDBDBD">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
@@ -26,6 +26,7 @@
 
 
 <a th:href="'/comment/add/' + ${id}">Add comments</a>
+<a th:href="'/comment/remove/' + ${id}">Delete comment</a>
 
 </body>
 </html>
