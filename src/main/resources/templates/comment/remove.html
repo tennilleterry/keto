@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container" style="background-color:#BDBDBD">
+<body class="container" style="background-color:#dfddda">
 
 <h1 th:text="${title}">Default Title</h1>
 
@@ -11,11 +11,11 @@
 
     <div th:each="comment : ${comments}" class="checkbox">
         <input type="checkbox" name="ids" th:value="${comment.id}" th:id="${comment.id}"/>
-        <label th:for="${comment.id}" th:text="${comment.title}"></label>
+        <label th:for="${comment.id}" th:text="${comment.entry}"></label>
         <br />
     </div>
 
-    <!--<input type="submit" value="Remove Listing" />-->
+
     <button type="submit" class="btn btn-primary">Remove Comment</button>
 </form>
 

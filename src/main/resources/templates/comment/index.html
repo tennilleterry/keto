@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container" style="background-color:#BDBDBD">
+<body class="container" style="background-color:#dfddda">
 
 
 <h1 th:text="${user} + ' ' + ' Comments'"></h1>
@@ -20,10 +20,8 @@
 
     <tr>
         <th>Recipe</th>
-        <th>Title</th>
-        <th>Entry</th>
+        <th>My Comment</th>
 
-        <th>User</th>
 
     </tr>
 
@@ -31,24 +29,13 @@
 
     <tr th:each="comment : ${comments}">
 
-        <td th:text="${comment.recipe.name}"></td>
-        <td th:text="${comment.title}"></td>
+        <td th:text="${comment.recipe.name} + ' by ' + ${comment.recipe.user.username}"></td>
+
         <td th:text="${comment.entry}"></td>
 
-
-        <td th:text="${comment.user.username}"></td>
     </tr>
 
 </table>
-
-
-
-
-
-
-
-
-
 
 
 <a href="/comment/remove" class="btn btn-info" role="button">Remove Comment</a>

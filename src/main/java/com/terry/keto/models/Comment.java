@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,9 +16,7 @@ public class Comment {
     @GeneratedValue
     private int id;
 
-    @NotNull
-    @Size(min = 8, max = 100, message = "min 8 max 100")
-    private String title;
+
 
     @NotNull
     @Size(min = 8, max = 100, message = "min 8 max 100")
@@ -26,8 +25,10 @@ public class Comment {
     @ManyToOne
     private User user;
 
-    public Comment(String title, String entry) {
-        this.title = title;
+
+
+    public Comment(String entry) {
+
         this.entry = entry;
 
     }
@@ -35,8 +36,6 @@ public class Comment {
 
 
 
-    //@ManyToMany(mappedBy="comments")
-    //private List<Recipe> recipes;
 
     @ManyToOne
     private Recipe recipe;
@@ -50,15 +49,7 @@ public class Comment {
         return id;
     }
 
-    public String getTitle() {
 
-        return title;
-    }
-
-    public void setTitle(String title) {
-
-        this.title = title;
-    }
 
     public String getEntry() {
 
@@ -71,7 +62,7 @@ public class Comment {
 
     }
 
-    //public List<Recipe> getRecipe() { return recipes; }
+
 
     public Recipe getRecipe() {
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container" style="background-color:#BDBDBD">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation2"></nav>
+
+
+
+
+
+
+
+<h1 th:text="'All Recipes by ' + ${user}">Default Title</h1>
+
+<p th:each="recipe : ${recipes}">
+
+    <a th:href="'/comment/add/' + ${recipe.id}" th:text="${recipe.name}"></a>
+</p>
+
+<hr />
+
+
+<h1 th:text="'All Photos by ' + ${user}">Default Title</h1>
+<p th:each="pic : ${pics}">
+
+
+    <a th:href="'/home/userPhotos/' + ${pic.id}">
+        <img th:src="@{${pic.photosImagePath}}" alt="image" width="50" height="50" />
+    </a>
+
+
+</p>
+
+
+
+
+
+
+
+
+</body>
+</html>

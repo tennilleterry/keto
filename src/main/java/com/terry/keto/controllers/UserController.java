@@ -38,7 +38,9 @@ public class UserController {
         if(!errors.hasErrors() && user.getPassword().equals(verify) && sameName.isEmpty()) {
             model.addAttribute("user", user);
             userDao.save(user);
-            return "recipe/index";
+
+            /////////////////////
+            return "user/login";
         } else {
             model.addAttribute("user", user);
             model.addAttribute("title", "User Signup");

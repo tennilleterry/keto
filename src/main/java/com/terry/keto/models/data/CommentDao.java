@@ -11,6 +11,4 @@ import javax.transaction.Transactional;
 public interface CommentDao extends CrudRepository<Comment,Integer> {
     public Comment findById(int id);
 
-   // void delete(int id);
-    //void delete(int id);
 }

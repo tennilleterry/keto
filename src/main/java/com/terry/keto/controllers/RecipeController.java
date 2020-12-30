@@ -1,19 +1,24 @@
 package com.terry.keto.controllers;
 
 
-import com.terry.keto.models.Comment;
-import com.terry.keto.models.Recipe;
-import com.terry.keto.models.User;
+import com.terry.keto.models.*;
 import com.terry.keto.models.data.CommentDao;
 import com.terry.keto.models.data.RecipeDao;
 import com.terry.keto.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("recipe")
@@ -38,8 +43,11 @@ public class RecipeController {
 
         User u = userDao.findByUsername(username).get(0);
         model.addAttribute("recipes", u.getRecipes());
-        //model.addAttribute("title", "My Recipes");
         model.addAttribute("user", u.getUsername());
+
+
+
+
 
         return "recipe/index";
     }
@@ -57,11 +65,16 @@ public class RecipeController {
         return "recipe/add";
     }
 
+
+    //Code with image
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddRecipeForm(
             @ModelAttribute @Valid Recipe newRecipe,
             Errors errors,
-            Model model , @CookieValue(value = "user", defaultValue = "none") String username) {
+            Model model , @CookieValue(value = "user", defaultValue = "none") String username,
+            @RequestParam("image") MultipartFile multipartFile) throws IOException{
+
+
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
@@ -73,12 +86,23 @@ public class RecipeController {
             return "recipe/add";
         }
 
+        String aName = newRecipe.camelCase(newRecipe.getName());
+        newRecipe.setName(aName);
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        newRecipe.setPhoto(fileName);
+
+        Recipe savedPhoto = recipeDao.save(newRecipe);
+
+        String uploadDir = "user-photos/" + savedPhoto.getId();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         newRecipe.setUser(u);
         recipeDao.save(newRecipe);
 
 
-        // "redirect:view/" + newRecipe.getId(); Shows view of recipe
+
 
         return "redirect:";
     }
@@ -89,26 +113,21 @@ public class RecipeController {
 
 
 
-    @RequestMapping(value="view/{id}", method = RequestMethod.GET)
-    public String viewRecipe(Model model, @PathVariable int id){
 
 
-
-        Recipe recipe = recipeDao.findById(id);
-
-        model.addAttribute("title", recipe.getName());
-        model.addAttribute("description", recipe.getDescription());
-
-
-        model.addAttribute("comments",recipe.getComments());
-        model.addAttribute("id", recipe.getId());
-
-        return "recipe/view";
-    }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveRecipeForm(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+    public String displayRemoveRecipeForm(Model model,@CookieValue(value = "user", defaultValue = "none") String username) {
+        //User u = userDao.findByUsername(username).get(0);
+
+        if(username.equals("none")) {
+            return "redirect:/user/login";
+        }
+
+
         User u = userDao.findByUsername(username).get(0);
+
+
         model.addAttribute("recipes", u.getRecipes());
         model.addAttribute("title", "Remove recipe");
         return "recipe/remove";
@@ -122,6 +141,7 @@ public class RecipeController {
         }
         return "redirect:";
     }
+
 
 
 

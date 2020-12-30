@@ -9,11 +9,11 @@
     <link type="text/css" href="css/styles.css" rel="stylesheet" />
 
 </head>
-<body>
+<body class="container" style="background-color:#251f1e">
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation" style="background-color:#433b3a">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation" style="background-color:#dfddda">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/user/add">New? Click to create an account.</a>
@@ -25,13 +25,13 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/user/add"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="/user/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation2" style="background-color:#433b3a">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation2" style="background-color:#dfddda">
 <!--<nav class="navbar navbar-inverse" th:fragment="navigation2">-->
     <div class="container-fluid">
         <div class="navbar-header">
@@ -41,11 +41,12 @@
 
             <li><a href="/recipe">My Recipes</a></li>
             <li><a href="/comment">My Comments</a></li>
+            <li><a href="/photos/add">Share progress pics</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/user/add"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="/user/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

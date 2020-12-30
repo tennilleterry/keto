@@ -15,12 +15,21 @@ public class Recipe {
     private int id;
 
     @NotNull
-    @Size(min = 8, max = 100, message = "min 8, max 100")
+    @Size(min = 2, max = 100, message = "min 8, max 100")
     private String name;
 
     @NotNull
     @Size(min = 8, max = 300, message = "min 8, max 300")
     private String description;
+
+
+
+
+
+   @Column(nullable = true, length = 64)
+    private String photo;
+
+
 
 
 
@@ -31,14 +40,16 @@ public class Recipe {
     @JoinColumn(name = "recipe_id")
     private List<Comment> comments = new ArrayList<>();
 
-    //@ManyToMany
-    //private List<Comment> comments;
 
-    public Recipe(String name, String description) {
+
+    public Recipe(String name, String description, String photo) {
         this.name = name;
         this.description = description;
+        this.photo = photo;
 
     }
+
+
 
     public Recipe() { }
 
@@ -70,6 +81,31 @@ public class Recipe {
 
 
 
+
+    public String getPhoto() {
+
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+
+        this.photo = photo;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || id == 0) return "no pic";
+
+        return "/user-photos/" + id + "/" + photo;
+
+
+    }
+
+
+
+
+
+
     public User getUser() {
 
         return user;
@@ -80,7 +116,22 @@ public class Recipe {
     }
 
     public List<Comment> getComments(){
+
         return comments;
     }
+
+    public String camelCase(String name){
+        String res = "";
+        res += Character.toUpperCase(name.charAt(0));
+        for(int i = 1; i < name.length(); i++) {
+            if (name.charAt(i -1) == ' ') {
+                res += Character.toUpperCase(name.charAt(i));
+            } else{
+                res += name.charAt(i);
+            }
+        }
+        return res;
+    }
+
 
 }

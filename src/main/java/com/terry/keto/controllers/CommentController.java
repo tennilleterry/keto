@@ -36,13 +36,15 @@ public class CommentController {
     public String index(Model model,@CookieValue(value = "user", defaultValue = "none")
             String username) {
 
+        if(username.equals("none")) {
+            return "redirect:/user/login";
+        }
 
-        //model.addAttribute("title", "All My Comments");
         User u = userDao.findByUsername(username).get(0);
 
 
         model.addAttribute("comments", u.getComments());
-        //model.addAttribute("recipes", u.getRecipes());
+
         model.addAttribute("user", u.getUsername());
 
 
@@ -67,10 +69,27 @@ public class CommentController {
         model.addAttribute("description",recipe.getDescription());
 
 
-        model.addAttribute("comments", recipe.getComments());
+
+
+
+
+        //model.addAttribute("photo",recipe.getPhoto());
+        model.addAttribute("thisPhoto", recipe.getPhotosImagePath());
+
+
+
+
+
+
+        List<Comment> comments = recipe.getComments();
+        model.addAttribute("comments", comments);
+       // model.addAttribute("comments", recipe.getComments());  revised 2 lines above same as this one??
+
+
 
 
         model.addAttribute("user",u.getUsername());
+
 
 
 
@@ -110,28 +129,26 @@ public class CommentController {
 
 
         Recipe recipe = recipeDao.findById(id);
+
+
         newComment.setUser(u);
         newComment.setRecipe(recipe);
         commentDao.save(newComment);
 
 
-
-
-
-
-
         return "redirect:/comment/";
+
 
 
     }
 
 
-
-
-
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCommentForm(Model model, @CookieValue(value = "user", defaultValue = "none")
             String username) {
+        if(username.equals("none")) {
+            return "redirect:/user/login";
+        }
 
         User u = userDao.findByUsername(username).get(0);
         model.addAttribute("comments", u.getComments());

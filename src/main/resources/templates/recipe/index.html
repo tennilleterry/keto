@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container" style="background-color:#BDBDBD">
+<body class="container" style="background-color:#dfddda">
 
 
 <!--<h1 th:text="${title} + ' ' + 'Welcome:' +' '+ ${user}">Default Title</h1>-->
@@ -22,6 +22,7 @@
     <tr>
         <th>Recipe</th>
         <th>Description</th>
+        <th>Pic</th>
         <th>User</th>
 
 
@@ -30,6 +31,7 @@
     <tr th:each="recipe : ${recipes}">
         <td th:text="${recipe.name}"></td>
         <td th:text="${recipe.description}"></td>
+        <td><img th:src="@{${recipe.photosImagePath}}" alt="image" width="100" height="50" /></td>
         <td th:text="${recipe.user.username}"></td>
 
 
@@ -41,6 +43,8 @@
 </table>
 <a href="/recipe/add" class="btn btn-info" role="button">Add Recipe</a>
 <a href="/recipe/remove" class="btn btn-info" role="button">Remove Recipe</a>
+<!--<a href="/photos/add" class="btn btn-info" role="button">Add Photo</a>-->
+
 
 
 

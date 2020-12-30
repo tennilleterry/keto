@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<nav th:replace="fragments :: navigation2"></nav>
+
+
+<body class="container" style="background-color:#dfddda">
+
+<h1 th:text="'Your search term is, ' + ${searchTerm} + '!'">Default Title</h1>
+<div class="container body-content">
+
+    <h1 th:if= "${results}" th:text="${results.size() + ' Results Found'}"></h1>
+    <hr />
+
+    <table class="table">
+
+        <tr th:each="result : ${results}">
+            <td th:text="${result.name}"></td>
+
+        </tr>
+
+    </table>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,32 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container" style="background-color:#BDBDBD">
+<body class="container" style="background-color:#dfddda">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1>wow</h1>
-
-<h1 th:text="${title}">Default Title</h1>
-<h1 th:text="${id}">Default Title</h1>
-
-<!--<ul>
-    <li th:each="comment : ${comments}" th:text="${comment.title}">
-    </li>
-</ul>
-
 <ul>
-    <li th:each="recipe : ${recipes}" th:text="${recipe.description}">
+    <li th:each="reply : ${replies}" th:text="${reply.entry}">
     </li>
 </ul>
-<p th:unless="${comments} and ${comments.size()}"><i>No comments Yet</i></p>-->
 
 
 
 
-<a th:href="'/comment/add/' + ${id}">Add comments</a>
-<a th:href="'/comment/remove/' + ${id}">Delete comment</a>
+<a th:href="'/recipe/add-item/' + ${id}">Add replies</a>
 
 </body>
 </html>

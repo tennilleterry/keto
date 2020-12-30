@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container" style="background-color:#BDBDBD">
+<body class="container" style="background-color:#dfddda">
 
 
 <nav th:replace="fragments :: navigation2"></nav>
@@ -9,17 +9,49 @@
 
 
 
-<h1><p th:text="${title}">Default Title</p></h1>
+<h1><p th:text="${title}"></p></h1>
+
+<!--<table class="table">
+
+    <tr>
+
+        <th>Description</th>
+        <th>Pic</th>
+
+
+
+    </tr>
+
+    <tr>
+        <td th:text="${description}">Default Title></td>
+        <img th:src="@{${thisPhoto}}" alt="image" width="100" height="50" /></td>
+
+
+
+    </tr>
+
+
+
+</table>
+
+
+-->
+
 <p th:text="${description}">Default Title</p>
+<img th:src="@{${thisPhoto}}" alt="image" width="100" height="50" />
 
 
+<hr />
 
-<form method="post" style="max-width:200px;margin:10px; margin-right:50px;margin-left:800px" th:object="${comment}">
-    <div class="form-group">
+<h1>Add your comments/variations</h1>
+
+<form method="post" style="max-width:200px;margin:10px; margin-right:50px" th:object="${comment}">
+
+   <!-- <div class="form-group">
         <label th:for="title">Title</label>
         <input class="form-control" th:field="*{title}" />
         <span th:errors="*{title}" class="error"></span>
-    </div>
+    </div>-->
 
     <div class="form-group">
         <label th:for="entry">Entry</label>
@@ -28,21 +60,21 @@
     </div>
 
 
-    <!--<input type="hidden" name="recipeId" th:value="*{id}" />-->
+
 
     <button type="submit" class="btn btn-primary">Add Comment</button>
 
-    <!--<input type="submit" value="Add Comment" />-->
-</form>
 
+</form>
+    <hr />
 
 <table class="table table-hover" style="max-width:800px; margin-right:50px;">
     <thead class="thead-dark">
 
     <tr>
 
-        <th>Title</th>
-        <th>Entry</th>
+
+        <th>Comments</th>
         <th>User</th>
 
 
@@ -52,7 +84,7 @@
 
     <tr th:each="comment : ${comments}">
 
-        <td th:text="${comment.title}"></td>
+
         <td th:text="${comment.entry}"></td>
         <td th:text="${comment.user.username}"></td>
 

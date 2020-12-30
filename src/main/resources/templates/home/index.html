@@ -2,28 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container" style="background-color:#BDBDBD">
-
-<h1 th:text="${title}">Default Title</h1>
-
 <nav th:replace="fragments :: navigation2"></nav>
 
 
+<body class="container" style="background-color:#dfddda">
+
+
+
+<h1 th:text="'Welcome to Ketopia, ' + ${user} + '!'">Default Title</h1>
+
 <p><a href="/recipe/add">Add recipe</a></p>
-<p>
-
-
-        <h2>Recipes</h2>
 
 
 
+<form th:action="@{/home/search}">
 
-    <p th:each="recipe : ${recipes}">
+    <p>
+        <label for="searchTerm">Search:</label>
+        <input type="text" name="searchTerm" id="searchTerm" />
+    </p>
 
-        <td><a th:href="'/comment/add/' + ${recipe.id}" th:text="${recipe.name}"></a></td>
-        <td th:text="'by ' + ${recipe.user.username}"></td>
+        <input type="submit" value="Go" />
+</form>
+    <hr />
+        <h2>All Recipes</h2>
 
 
+   <p th:each="recipe : ${#lists.sort(recipes, byName)}">
+
+        <td><a th:href="'/comment/add/' + ${recipe.id}" th:text="${recipe.name}"></a> by </td>
+
+        <td><a th:href="'/home/view/' + ${recipe.user.id}" th:text="${recipe.user.username}"></a></td>
 
 
     </p>
@@ -31,21 +40,14 @@
 
 
 
-
-
-</table>
-
-
-
-
-
+    <hr />
 
 
 <a href="https://www.facebook.com/sharer/
 sharer.php?u=https%3A%2F%2Fketodietapp.com%2FBlog%2Flchf%2F7-common-diet-myths-in-the-keto-community">FaceBook</a>
 
 
-<p><a href="/user/login">Get started!!!!</a></p>
+
 
 </body>
 </html>

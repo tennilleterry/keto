@@ -39,6 +39,8 @@ public class User {
     private List<Comment> comments;
 
 
+
+
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -73,35 +75,29 @@ public class User {
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public List<Recipe> getRecipes() {
+
         return recipes;
     }
 
     public List<Photo> getPhotos() {
+
         return photos;
     }
 
     public List<Comment> getComments() {
+
         return comments;
     }
 
-   /* public List<Book> getBooks() {
 
-        return books;}
-
-
-
-    public List<Book1> getBook1() {
-        return book1;}
-
-    public List<Book2> getBook2() {
-        return book2;}
-        */
 }
