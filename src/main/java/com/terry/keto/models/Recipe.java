@@ -23,12 +23,8 @@ public class Recipe {
     private String description;
 
 
-
-
-
    @Column(nullable = true, length = 64)
     private String photo;
-
 
 
 
@@ -40,6 +36,9 @@ public class Recipe {
     @JoinColumn(name = "recipe_id")
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private List<Ingredient> ingredients = new ArrayList<>();
 
 
     public Recipe(String name, String description, String photo) {
@@ -48,6 +47,7 @@ public class Recipe {
         this.photo = photo;
 
     }
+
 
 
 
@@ -77,8 +77,6 @@ public class Recipe {
 
         this.description = description;
     }
-
-
 
 
 
@@ -119,6 +117,12 @@ public class Recipe {
 
         return comments;
     }
+
+    public List<Ingredient> getIngredients(){
+
+        return ingredients;
+    }
+
 
     public String camelCase(String name){
         String res = "";

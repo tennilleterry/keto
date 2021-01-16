@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container" style="background-color:#dfddda">
+
+<nav th:replace="fragments :: navigation2"></nav>
+
+
+
+<p th:unless="${ingredients} and ${ingredients.size()}">No ingredients yet!</p>
+
+
+
+    <table class="table">
+
+        <tr>
+            <th>Ingredients</th>
+
+
+        </tr>
+
+        <tr th:each="ingredient : ${ingredients}">
+            <td th:text="${ingredient.unit} + ' ' + ${ingredient.name}">Default Title</td>
+        </tr>
+
+
+
+    </table>
+
+
+<hr />
+
+<h1>Add Ingredient</h1>
+
+
+
+
+
+    <form method="post" style="max-width:200px;margin:10px; margin-right:50px" th:object="${ingredient}">
+    <div class="form-group">
+        <label th:for="unit">Unit of Measure</label>
+        <input class="form-control" th:field="*{unit}" />
+        <span th:errors="*{unit}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Save Ingredient</button>
+
+
+</form>
+
+<a href="/ingredient/remove" class="btn btn-info" role="button">Remove Ingredient</a>
+
+<a href="/recipe/" class="btn btn-info" role="button">Done</a>
+
+</body>
+</html>

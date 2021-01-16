@@ -7,26 +7,9 @@
 
 <nav th:replace="fragments :: navigation2"></nav>
 <h1>Add a Recipe</h1>
+<h5 th:text="${date}"></h5>
 
 
-<!--<form method="post" style="max-width:600px;" th:object="${recipe}">
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
-    </div>
-
-    <div class="form-group">
-        <label th:for="description">Description</label>
-        <input class="form-control" th:field="*{description}" />
-        <span th:errors="*{description}" class="error"></span>
-    </div>
-
-
-
-
-    <input type="submit" value="Submit Recipe" />
-</form>-->
 
 
 <form th:action="@{/recipe/add}"
@@ -52,9 +35,16 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Add Recipe</button>
+
+
+    <button type="submit" class="btn btn-primary">Add Ingredients</button>
+
 
 </form>
+
+
+
+
 
 </body>
 </html>

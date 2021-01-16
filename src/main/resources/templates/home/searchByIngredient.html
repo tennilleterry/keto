@@ -7,7 +7,7 @@
 
 <body class="container" style="background-color:#dfddda">
 
-<h4 th:text="'Recipes containing: ' + ${searchTerm}">Default Title</h4>
+<h4 th:text="'Recipes containing: ' + ${searchByIngredient}">Default Title</h4>
 <div class="container body-content">
 
     <h2 th:if= "${results}" th:text="${results.size() + ' Result(s) found'}"></h2>
@@ -23,7 +23,7 @@
             <td><a th:href="'/home/view/' + ${result.user.id}" th:text="${result.user.username}"></a></td>
 
 
-         </tr>
+        </tr>
     </p>
 
 </div>

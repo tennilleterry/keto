@@ -1,12 +1,10 @@
 package com.terry.keto.controllers;
 
+import com.terry.keto.models.Ingredient;
 import com.terry.keto.models.Photo;
 import com.terry.keto.models.Recipe;
 import com.terry.keto.models.User;
-import com.terry.keto.models.data.CommentDao;
-import com.terry.keto.models.data.PhotoDao;
-import com.terry.keto.models.data.RecipeDao;
-import com.terry.keto.models.data.UserDao;
+import com.terry.keto.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -34,6 +32,9 @@ public class HomeController {
 
     @Autowired
     PhotoDao photoDao;
+
+    @Autowired
+    IngredientDao ingredientDao;
 
 
 
@@ -71,6 +72,23 @@ public class HomeController {
         model.addAttribute("searchTerm", searchTerm);
         model.addAttribute("results", results);
         return "home/search";
+    }
+
+
+    @RequestMapping(value = "searchByIngredient", method = RequestMethod.GET)
+    public String searchByIngredientsResults(Model model, @Param("searchByIngredient") String searchByIngredient) {
+        searchByIngredient = searchByIngredient.substring(0,1).toUpperCase() + searchByIngredient.substring(1);
+        List<Ingredient> listIngredients = (List<Ingredient>) ingredientDao.findAll();
+        List<Recipe> results = new ArrayList<>();
+        for(Ingredient ingredient:listIngredients){
+            if(ingredient.getName().contains(searchByIngredient)){
+                results.add(ingredient.getRecipe());
+            }
+
+        }
+        model.addAttribute("searchByIngredient", searchByIngredient);
+        model.addAttribute("results", results);
+        return "home/searchByIngredient";
     }
 
 

@@ -42,10 +42,10 @@ public class CommentController {
 
         User u = userDao.findByUsername(username).get(0);
 
-
         model.addAttribute("comments", u.getComments());
 
         model.addAttribute("user", u.getUsername());
+
 
 
 
@@ -65,8 +65,13 @@ public class CommentController {
 
 
         Recipe recipe = recipeDao.findById(id);
+
+
         model.addAttribute("title", recipe.getName());
+        model.addAttribute("recipeAuthor", recipe.getUser());
         model.addAttribute("description",recipe.getDescription());
+        model.addAttribute("ingredients",recipe.getIngredients());
+
 
 
 

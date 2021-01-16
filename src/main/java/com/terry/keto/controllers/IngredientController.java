@@ -13,19 +13,17 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.time.LocalDate;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("recipe")
-public class RecipeController {
+@RequestMapping("ingredient")
+public class IngredientController {
 
     @Autowired
     private RecipeDao recipeDao;
@@ -40,7 +38,7 @@ public class RecipeController {
     private IngredientDao ingredientDao;
 
 
-    @RequestMapping(value = "")
+  /*  @RequestMapping(value = "")
     public String index(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
 
         if(username.equals("none")) {
@@ -52,86 +50,91 @@ public class RecipeController {
         model.addAttribute("user", u.getUsername());
 
 
-
-       List<Ingredient> ingredientList = new ArrayList<>();
-        for(Recipe theRecipe:u.getRecipes()){
-            for(Ingredient ingredient:theRecipe.getIngredients()){
-                ingredientList.add(ingredient);
-            }
-        }
-
-        model.addAttribute("ingredientList", ingredientList);
-
-
-
-
         return "recipe/index";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddRecipeForm(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+*/
+
+
+
+    @RequestMapping(value = "add/{id}", method = RequestMethod.GET)
+    public String displayAddIngredientForm(Model model, @PathVariable int id,
+                                           @CookieValue(value = "user", defaultValue = "none") String username) {
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
         User u = userDao.findByUsername(username).get(0);
-        
-
-        LocalDateTime date = LocalDateTime.now();
-        model.addAttribute("date", date);
-
-        model.addAttribute("title", "Add recipe");
-        model.addAttribute(new Recipe());
 
 
-        return "recipe/add";
+        model.addAttribute("title", "Add Ingredient");
+        Recipe recipe = recipeDao.findById(id);
+
+        model.addAttribute("ingredients",recipe.getIngredients());
+
+        model.addAttribute(new Ingredient());
+
+
+        return "ingredient/add";
     }
 
 
 
-    //Code with image
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddRecipeForm(
-            @ModelAttribute @Valid Recipe newRecipe,
+
+    @RequestMapping(value = "add/{id}", method = RequestMethod.POST)
+    public String processAddIngredientForm(
+            @ModelAttribute @Valid Ingredient newIngredient,
+            @PathVariable int id,
             Errors errors,
-            Model model , @CookieValue(value = "user", defaultValue = "none") String username,
-            @RequestParam("image") MultipartFile multipartFile) throws IOException{
+            Model model , @CookieValue(value = "user", defaultValue = "none") String username){
 
 
         if(username.equals("none")) {
             return "redirect:/user/login";
         }
-
-
         User u = userDao.findByUsername(username).get(0);
+
+
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add recipe");
-            return "recipe/add";
+            model.addAttribute("title", "Add Ingredient");
+            return "ingredient/add";
         }
 
-        String aName = newRecipe.camelCase(newRecipe.getName());
-        newRecipe.setName(aName);
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        newRecipe.setPhoto(fileName);
+        String anIngredient = newIngredient.camelCase(newIngredient.getName());
+        newIngredient.setName(anIngredient);
 
 
-        Recipe savedPhoto = recipeDao.save(newRecipe);
+        Recipe recipe = recipeDao.findById(id);
+        newIngredient.setRecipe(recipe);
+        ingredientDao.save(newIngredient);
 
-        String uploadDir = "user-photos/" + savedPhoto.getId();
 
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        return "redirect:/ingredient/add/" + recipe.getId();
 
-        newRecipe.setUser(u);
-        recipeDao.save(newRecipe);
 
-        return "redirect:/ingredient/add/" + newRecipe.getId();
+
+
     }
 
 
 
-    @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveRecipeForm(Model model,@CookieValue(value = "user", defaultValue = "none") String username) {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*   @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveRecipeForm(Model model,@CookieValue(value = "user", defaultValue = "none") String username) {
+        //User u = userDao.findByUsername(username).get(0);
 
         if(username.equals("none")) {
             return "redirect:/user/login";
@@ -156,6 +159,6 @@ public class RecipeController {
     }
 
 
-
+*/
 
 }

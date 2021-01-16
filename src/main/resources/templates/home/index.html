@@ -5,7 +5,7 @@
 <nav th:replace="fragments :: navigation2"></nav>
 
 
-<body class="container" style="background-color:#dfddda">
+<body class="container" style="background-color:#dfddda ">
 
 
 
@@ -18,13 +18,35 @@
 <form th:action="@{/home/search}">
 
     <p>
-        <label for="searchTerm">Search:</label>
+        <label for="searchTerm">Search by Recipe:</label>
         <input type="text" name="searchTerm" id="searchTerm" />
     </p>
 
         <input type="submit" value="Go" />
 </form>
     <hr />
+
+
+
+
+
+
+<form th:action="@{/home/searchByIngredient}">
+
+    <p>
+        <label for="searchByIngredient">Search by Ingredients:</label>
+        <input type="text" name="searchByIngredient" id="searchByIngredient" />
+    </p>
+
+    <input type="submit" value="Go" />
+</form>
+
+
+
+
+
+<hr />
+
         <h2>All Recipes</h2>
 
 
@@ -41,6 +63,10 @@
 
 
     <hr />
+
+
+
+
 
 
 <a href="https://www.facebook.com/sharer/
