@@ -11,7 +11,8 @@
 
 <h1><p th:text="${title}"></p></h1>
 <h5><p th:text="'by ' + ${recipeAuthor.username}"></p></h5>
-
+<h6><p th:text="${date}"></p></h6>
+<h3>Ingredients</h3>
 
 <tr th:each="ingredient : ${ingredients}">
 
@@ -23,6 +24,7 @@
 
 
 <img th:src="@{${thisPhoto}}" alt="image" width="100" height="50" />
+<p><h3>Description</h3></p>
 <p th:text="${description}">Default Title</p>
 
 <hr />
@@ -62,8 +64,16 @@
     <tr th:each="comment : ${comments}">
 
 
-        <td th:text="${comment.entry}"></td>
+     <!--   <td th:text="${comment.entry}"></td>
         <td th:text="${comment.user.username}"></td>
+        <td th:text="${comment.getDate()}"></td>
+-->
+        <h5><p th:text="${comment.user.username} + ' ' + ${comment.getDate()}"></p></h5>
+
+        <p th:text="${comment.entry}"></p>
+
+        <hr />
+
 
 
     </tr>

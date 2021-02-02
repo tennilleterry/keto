@@ -29,9 +29,11 @@
 
     <tr th:each="comment : ${comments}">
 
+
         <td th:text="${comment.recipe.name} + ' by ' + ${comment.recipe.user.username}"></td>
 
         <td th:text="${comment.entry}"></td>
+        <td th:text="${comment.getDate()}"></td>
 
     </tr>
 

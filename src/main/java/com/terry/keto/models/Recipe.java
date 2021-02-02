@@ -4,8 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 public class Recipe {
@@ -22,11 +26,10 @@ public class Recipe {
     @Size(min = 8, max = 300, message = "min 8, max 300")
     private String description;
 
+    private LocalDate date = LocalDate.now();
 
-   @Column(nullable = true, length = 64)
+    @Column(nullable = true, length = 64)
     private String photo;
-
-
 
 
     @ManyToOne
@@ -49,9 +52,15 @@ public class Recipe {
     }
 
 
+    public Recipe() {
 
+    }
 
-    public Recipe() { }
+    public LocalDate getDate() {
+
+        return date;
+    }
+
 
     public int getId() {
 
@@ -79,7 +88,6 @@ public class Recipe {
     }
 
 
-
     public String getPhoto() {
 
         return photo;
@@ -100,42 +108,68 @@ public class Recipe {
     }
 
 
-
-
-
-
     public User getUser() {
 
         return user;
     }
+
     public void setUser(User u) {
 
         this.user = u;
     }
 
-    public List<Comment> getComments(){
+    public List<Comment> getComments() {
 
         return comments;
     }
 
-    public List<Ingredient> getIngredients(){
+    public List<Ingredient> getIngredients() {
 
         return ingredients;
     }
 
 
-    public String camelCase(String name){
+    public String camelCase(String name) {
         String res = "";
         res += Character.toUpperCase(name.charAt(0));
-        for(int i = 1; i < name.length(); i++) {
-            if (name.charAt(i -1) == ' ') {
+        for (int i = 1; i < name.length(); i++) {
+            if (name.charAt(i - 1) == ' ') {
                 res += Character.toUpperCase(name.charAt(i));
-            } else{
+            } else {
                 res += name.charAt(i);
             }
         }
         return res;
     }
 
+ /*   public String getRandomElement(List<String> list) {
+        Random r = new Random();
+
+        int randomItem = r.nextInt(list.size());
+        String randomElement = list.get(randomItem);
+
+
+        return randomElement;
+
+
+    }
+    */
+
+    public Recipe getRandomElement(List<Recipe> list) {
+        Random r = new Random();
+
+        int randomItem = r.nextInt(list.size());
+        Recipe randomElement = list.get(randomItem);
+
+
+        return randomElement;
+
+
+    }
+
 
 }
+
+
+
+

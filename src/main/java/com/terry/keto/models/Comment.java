@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,10 @@ public class Comment {
 
 
     @NotNull
-    @Size(min = 8, max = 100, message = "min 8 max 100")
+    @Size(min = 3, max = 100, message = "min 8 max 100")
     private String entry;
+
+    private LocalDate date = LocalDate.now();
 
     @ManyToOne
     private User user;
@@ -61,6 +64,15 @@ public class Comment {
         this.entry = entry;
 
     }
+
+    public LocalDate getDate() {
+
+        return date;
+    }
+
+
+
+
 
 
 

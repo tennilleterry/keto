@@ -74,10 +74,9 @@ public class RecipeController {
             return "redirect:/user/login";
         }
         User u = userDao.findByUsername(username).get(0);
-        
 
-        LocalDateTime date = LocalDateTime.now();
-        model.addAttribute("date", date);
+
+
 
         model.addAttribute("title", "Add recipe");
         model.addAttribute(new Recipe());

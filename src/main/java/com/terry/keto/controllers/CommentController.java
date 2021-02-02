@@ -69,6 +69,7 @@ public class CommentController {
 
         model.addAttribute("title", recipe.getName());
         model.addAttribute("recipeAuthor", recipe.getUser());
+        model.addAttribute("date", recipe.getDate());
         model.addAttribute("description",recipe.getDescription());
         model.addAttribute("ingredients",recipe.getIngredients());
 
@@ -86,18 +87,14 @@ public class CommentController {
 
 
 
-        List<Comment> comments = recipe.getComments();
-        model.addAttribute("comments", comments);
-       // model.addAttribute("comments", recipe.getComments());  revised 2 lines above same as this one??
+        //List<Comment> comments = recipe.getComments();
+        //model.addAttribute("comments", comments);
+        model.addAttribute("comments", recipe.getComments());  //revised 2 lines above same as this one??
 
 
 
 
         model.addAttribute("user",u.getUsername());
-
-
-
-
         model.addAttribute(new Comment());
 
 

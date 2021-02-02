@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -51,7 +48,36 @@ public class HomeController {
         model.addAttribute("byName", Comparator.comparing(Recipe::getName));
 
 
+    /*  List<String> recipeList = new ArrayList<>();
+        for (Recipe theRecipe: recipeDao.findAll()) {
+            String name = theRecipe.getName();
+            recipeList.add(name);
 
+        }
+
+        Recipe theRecipe = new Recipe();
+        model.addAttribute("randomElement", theRecipe.getRandomElement(recipeList));
+
+        */
+
+        List<Recipe> recipeList = new ArrayList<>();
+        for (Recipe theRecipe: recipeDao.findAll()) {
+            //String name = theRecipe.getName();
+            recipeList.add(theRecipe);
+
+        }
+
+
+      /*  Random r = new Random();
+
+        int randomItem = r.nextInt(recipeList.size());
+        Recipe randomElement = recipeList.get(randomItem);
+
+        model.addAttribute("randomElement", randomElement);
+*/
+
+        Recipe theRecipe = new Recipe();
+        model.addAttribute("randomElement", theRecipe.getRandomElement(recipeList));
         return "home/index";
 
 
